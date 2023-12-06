@@ -6,6 +6,11 @@
 package etudiant;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,10 +20,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author itu
+ * @author tiavi
  */
-@WebServlet(name = "ForumServlet", urlPatterns = {"/ForumServlet"})
-public class ForumServlet extends HttpServlet {
+@WebServlet(name = "ListeServlet", urlPatterns = {"/ListeServlet"})
+public class ListeServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,9 +37,19 @@ public class ForumServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-            System.out.println("Tiavina");
-            RequestDispatcher dispat = request.getRequestDispatcher("WEB-INF/form.jsp"); 
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            List<Etudiant> model =Etudiant.find(null);
+              RequestDispatcher dispat = request.getRequestDispatcher("WEB-INF/liste.jsp"); 
+              request.setAttribute("model",model);
             dispat.forward(request,response);
+            
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ListeServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ListeServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

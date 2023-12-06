@@ -7,7 +7,10 @@ package etudiant;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import util.DBConnection;
 
 /**
@@ -67,6 +70,31 @@ public class Etudiant {
         if (!wasConnected) {
             connection.close();
         }
+    }    
+     public static List<Etudiant> find(Connection connection) throws ClassNotFoundException, SQLException {
+        List<Etudiant> models = new ArrayList<>();
+        boolean wasConnected = true;
+        if (connection == null) {
+            connection = DBConnection.getConnection();
+            wasConnected = false;
+        }
+        String sql = "SELECT * FROM Etudiant";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+         
+      
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()) {
+                Etudiant model = new Etudiant();
+                model.setNom(rs.getString("nom"));
+                model.setPrenom(rs.getString("prenom"));
+                 model.setIdEtudiant(rs.getInt("Id_Etudiant"));
+                models.add(model);
+            }
+        }
+        if (!wasConnected) {
+            connection.close();
+        }
+        return models;
     }
     
      
