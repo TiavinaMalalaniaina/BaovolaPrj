@@ -5,6 +5,11 @@
  */
 package etudiant;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import util.DBConnection;
+
 /**
  *
  * @author itu
@@ -42,6 +47,23 @@ public class Etudiant {
 
     public void setPrenom(String prenom) {
         this.prenom = prenom;
+    }
+    
+    public void save(Connection connection) throws ClassNotFoundException, SQLException {
+        boolean wasConnected = true;
+        if(connection == null) {
+            connection = DBConnection.getConnection();
+            wasConnected = false;
+        }
+        String sql = "INSERT INTO \"public\".etudiant( id_etudiant, nom, prenom) VALUES ( default, ?, ? )";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, this.getNom());
+            stmt.setString(2, this.getPrenom());
+            stmt.executeUpdate();
+        }
+        if (!wasConnected) {
+            connection.close();
+        }
     }
     
      
