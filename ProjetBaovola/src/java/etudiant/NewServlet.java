@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -37,11 +38,14 @@ public class NewServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try{
             /* TODO output your page here. You may use following sample code. */
+            HttpSession session = request.getSession();
+            session.setAttribute("name", "tiavina");
             String nom = request.getParameter("nom");
             String prenom = request.getParameter("prenom");
             
             Etudiant etudiant = new Etudiant(nom,prenom);
             etudiant.save(null);
+            response.sendRedirect("ListeServlet");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(NewServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {

@@ -1,8 +1,8 @@
-<%-- 
-    Document   : liste.jsp
-    Created on : 8 déc. 2023, 15:03:04
-    Author     : itu
---%>
+<%@page import="java.util.List"%>
+<%@page import="etudiant.Etudiant"%>
+<%
+       List<Etudiant> listeEmp =(List<Etudiant>)request.getAttribute("model");
+%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -12,6 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
+        fdghjklmS
         <h1>Liste des etudiants</h1>
         <table border=1>
             <tr>
@@ -19,16 +20,14 @@
                 <th>Nom</th>
                 <th>Prenom</th>
             </tr>
-            <tr>
-                <td>1</td>
-                <td>Nana</td>
-                <td>Anna</td>
+            <% for(Etudiant e:listeEmp){%>
+                 <tr>
+                     <td><%=e.getIdEtudiant()%></td>
+                     <td><%=e.getNom()%></td>
+                <td><%=e.getPrenom()%></td>
             </tr>
-              <tr>
-                <td>2</td>
-                <td>Rakoto</td>
-                <td>Jean</td>
-            </tr>
+            <% }%>
+            
         </table>
     </body>
 </html>

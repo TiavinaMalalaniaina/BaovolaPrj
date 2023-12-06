@@ -22,8 +22,7 @@ public class Etudiant {
     String nom;
     String prenom;
 
-    Etudiant() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Etudiant() {
     }
 
     public int getIdEtudiant() {
