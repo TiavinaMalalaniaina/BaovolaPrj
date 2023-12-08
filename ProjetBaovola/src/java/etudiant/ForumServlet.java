@@ -32,7 +32,7 @@ public class ForumServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-           RequestDispatcher dispat = request.getRequestDispatcher("form.jsp"); 
+           RequestDispatcher dispat = request.getRequestDispatcher("WEB-INF/form.jsp"); 
             dispat.forward(request,response);
     }
 

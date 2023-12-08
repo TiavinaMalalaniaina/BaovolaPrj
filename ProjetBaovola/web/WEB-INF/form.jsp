@@ -13,7 +13,7 @@
     </head>
     <body>
         <h1>Hello World!</h1>
-        <form method="post" action="newServlet">
+        <form method="post" action="NewServlet">
             <input type="text" name="nom" placeholder="Nom ..."/>
             <input type="text" name="prenom" placeholder="Prenom ..."/>
             <button type="submit">Valider</button>
