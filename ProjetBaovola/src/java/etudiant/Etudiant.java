@@ -19,6 +19,10 @@ public class Etudiant {
     String nom;
     String prenom;
 
+    Etudiant() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public int getIdEtudiant() {
         return idEtudiant;
     }
@@ -39,8 +43,7 @@ public class Etudiant {
         return prenom;
     }
 
-    public Etudiant(int idEtudiant, String nom, String prenom) {
-        this.idEtudiant = idEtudiant;
+    public Etudiant(String nom, String prenom) {
         this.nom = nom;
         this.prenom = prenom;
     }
